@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Ellie Wyatt</title>
+    
+    <link rel="stylesheet" href="royalslider/royalslider.css">
+    <script src='royalslider/jquery-1.8.3.min.js'></script>
+    <script src="royalslider/jquery.royalslider.min.js"></script>
+
+    <link rel="stylesheet" href="stylez.css" type="text/css" />
+
+</head>
+<body>
+    
+    <div class="container bg-grey">
+        
+        <h1 class="fade-left fade-right">Ellie<br>Wyatt</h1>
+        <a class="about-link about-big fade-left fade-right" href="#">ABOUT</a>
+        <a class="works-link works-big fade-left fade-right" href="#">WORKS</a>
+        
+ 
+        <!-- BLUE LAD -->
+        <div class="bg-aqua w-fifty">
+            <div class="bg-grey about w-fifty">
+                <h6>ABOUT</h6>
+                <p>Ellie Wyatt’s practice is primarily concerned with photography’s capacity for documenting the truth and for disseminating fictions. Drawing from resources including early photographic portraits, Google Image results of 1700s paintings, and censored photographs, she seeks to examine and amplify common themes that exist throughout eras and across imagery, such as the drape or the landscape as background.</p>
+                <p>Working from the earliest photographs of artworks through to contemporary media images of politicians, she examines the way photography is used to curate and create visual realities, considering the staged and the manipulated in its most benign and most sinister forms. She employs print as a medium that is inherently engaged in the conflict between the original and the reproduction, the analogue and the digital, and uses this to illustrate the paradox of digital decay as images become more widely circulated.</p>
+                <p>Using print to break down and amplify colours and shapes within individual photographs, the culmination of Wyatt’s research-led practice is often a curatorial exercise, where prints are presented alongside other more ephemeral media, such as photocopies. Borrowing display mechanisms from museums and information displays, Wyatt aims to create a relationship of inspection and examination between the work and the viewer.</p>
+                
+                <div class="contact">
+                    <h6>CONTACT</h6>
+                    <p class="no-indent"><a href="mailto:">info@elliewyatt.com</a><br />
+                    <a href="tel:">+44 (0) 7964 289731</a></p>
+                    <p><a href="" class="bio">Download Bio</a></p>
+                </div>
+                
+            </div>
+            
+            <p id="credit" class="fade-center fade-right">
+                Site designed by <a href="#">Oliver Long</a> and built by <a href="#">BONG</a>
+            </p>
+            
+            <a class="works-small works-link fade-center" href="#">WORKS</a>
+            
+        </div>
+        
+
+        <!-- WORKS -->
+        <div id="works" class="bg-grey w-fifty">
+            <div class="fade-center fade-left" style="height: 100%">
+                
+                <a class="about-small about-link" href="#">ABOUT</a>
+                
+                <div class="rsPrev hide-on-mobile"></div>
+                <div class="rsNext hide-on-mobile"></div>
+                
+                <div class="rsCount"></div>
+                <div class="rsTitle"></div>
+                <div class="rsCaption"></div>
+    
+                <div class="royalSlider rsDefault">
+    
+                    <img class="rsImg" src="http://40.media.tumblr.com/b5cf76d557caf42c57b7afa1fa498aa0/tumblr_na5py9jZYu1rn96nto1_1280.jpg" alt="A Pure Blue§Digital Print, 25cm x 30cm, Designed by Oliver Long<br>(shortlisted for the Unseen Photobook Dummy Award 2014)<br>2014" />
+                    <img class="rsImg" src="http://40.media.tumblr.com/e36c85028162cb32f1ed4658f5ff95f9/tumblr_njrapzWI2q1rn96nto1_1280.png" alt="Delaroche’s Veil§Duo tone photo etching, screenprint, 80cm x 75cm<br>2014" />
+                    <img class="rsImg" src="http://36.media.tumblr.com/2ac8f7bd46002e8836680cb9b75f1fd4/tumblr_nh7b1dBX5H1rn96nto1_1280.jpg" alt="Helen§Digital scans,<br>2013" />
+                        
+                </div>	
+                
+            </div>
+
+
+        </div>
+        
+    </div>
+    
+    <script>
+        
+        window.addEventListener('DOMContentLoaded', function(){
+    
+            var cnt = $('.container');
+            
+            $('.about-link').click(function(){
+                cnt.removeClass('right').addClass('left');
+                $('.about').addClass('shadow');
+            });
+            
+            $('.works-link').click(function(){
+                cnt.removeClass('left').addClass('right');
+            });
+            
+        });
+        
+    </script>
+    <script>
+    jQuery(document).ready(function($) {
+        var sliderJQ = $(".royalSlider").royalSlider({
+            // options go here
+            // as an example, enable keyboard arrows nav
+            keyboardNavEnabled: true,
+            loop: true,
+            transitionType: 'slide',
+            transitionSpeed: 500
+        });  
+        
+        var sliderInstance = sliderJQ.data('royalSlider');
+        
+        var $count = $('.rsCount'),
+            $caption = $('.rsCaption'),
+            $title = $('.rsTitle');
+            
+        $('.rsPrev').click(function(){
+            sliderInstance.prev();
+        });
+        
+        $('.rsNext').click(function(){
+            sliderInstance.next();
+        });
+        
+        function slidechange() {
+            
+            $count.html( (sliderInstance.currSlideId+1) + ' / ' + sliderInstance.numSlides );
+            
+            var info = sliderInstance.currSlide.caption.split('§');
+            
+            $title.fadeAndChange(info[0], 500);
+            $caption.fadeAndChange(info[1], 500);
+        }
+        
+        sliderInstance.ev.on('rsAfterSlideChange', slidechange);
+        slidechange();
+        
+    });
+    
+    $.fn.fadeAndChange = function(text, speed){
+        
+        var self = this;
+        
+        self.animate({opacity: 0}, {
+            duration: speed/2,
+            queue: false,
+            complete: function(){
+                self.html(text);
+                self.animate({opacity: 1}, {
+                    duration: speed/2,
+                    queue: false
+                });
+            }
+        });
+        
+    }
+    
+
+</script>
+</body>
+</html>
